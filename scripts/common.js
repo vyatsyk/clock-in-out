@@ -5,7 +5,10 @@ const { delay } = require('./utils');
 
 const login = async (helper) => {
   await helper.visit('https://people.group107.com/');
-  await helper.click('.btnlogin');
+  const signInButton = await helper.contains('button', 'Sign In');
+  if (signInButton) {
+    await signInButton.click();
+  }
   await helper.type(
     'input[placeholder="Email address or mobile number"]',
     process.env.ZOHO_EMAIL || 'asd'
